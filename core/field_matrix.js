@@ -356,10 +356,10 @@ Blockly.FieldMatrix.prototype.showEditor_ = function() {
   this.updateMatrix_();
 
 };
-
+/*
 this.nodeCallback_ = function(e, num) {
   console.log(num);
-};
+};*/
 
 /**
  * Make an svg object that resembles a 3x3 matrix to be used as a button.

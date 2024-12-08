@@ -1,3 +1,3 @@
 import Blockly from '../src'
 
-console.log(Blockly)
+Blockly.inject(document.getElementById('app'))

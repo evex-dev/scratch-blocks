@@ -30,6 +30,7 @@
  */
 goog.provide('Blockly.Css');
 
+goog.require('Blockly.FieldDate');
 goog.require('Blockly.Colours');
 
 goog.require('goog.userAgent');
