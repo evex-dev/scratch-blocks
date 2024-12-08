@@ -1,0 +1,4 @@
+const Blockly = {
+
+}
+export default {}
