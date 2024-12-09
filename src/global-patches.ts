@@ -2,15 +2,13 @@ import DefaultBlockly from './default-blockly'
 import * as color from './goog/color'
 import * as math from './goog/math'
 import * as style from './goog/style'
+import * as ui from './goog/ui'
+import * as events from './goog/events'
 
 export const Blockly = DefaultBlockly
 
 export const goog = {
-  events: {
-    BrowserFeature: {
-      TOUCH_ENABLED: 'ontouchstart' in window
-    }
-  },
+  events,
   inherits(childCtor, parentCtor) {
     /** @constructor */
     function tempCtor() { };
@@ -39,6 +37,9 @@ export const goog = {
   isNumber(val: unknown): val is number {
     return typeof val === 'number' || val instanceof Number
   },
+  isDef(val: unknown): boolean {
+    return val !== undefined
+  },
   string: {
     isEmptyOrWhitespace(v: string): boolean {
       return v == null || v.trim() === ''
@@ -48,6 +49,9 @@ export const goog = {
     },
     caseInsensitiveEquals(a: string, b: string): boolean {
       return a.toLowerCase() === b.toLowerCase()
+    },
+    htmlEscape(str: string) {
+      return str.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;').replaceAll("'", '&#039;')
     }
   },
   dom: {
@@ -105,36 +109,7 @@ export const goog = {
       }
     }
   },
-  ui: {
-    Component: {
-      setDefaultRightToLeft() { }
-    },
-    ColorPicker: {
-      /*! https://github.com/google/closure-library/blob/b312823ec5f84239ff1db7526f4a75cba0420a33/closure/goog/ui/colorpicker.js */
-      SIMPLE_GRID_COLORS: [
-        // grays
-        '#ffffff', '#cccccc', '#c0c0c0', '#999999', '#666666', '#333333', '#000000',
-        // reds
-        '#ffcccc', '#ff6666', '#ff0000', '#cc0000', '#990000', '#660000', '#330000',
-        // oranges
-        '#ffcc99', '#ff9966', '#ff9900', '#ff6600', '#cc6600', '#993300', '#663300',
-        // yellows
-        '#ffff99', '#ffff66', '#ffcc66', '#ffcc33', '#cc9933', '#996633', '#663333',
-        // olives
-        '#ffffcc', '#ffff33', '#ffff00', '#ffcc00', '#999900', '#666600', '#333300',
-        // greens
-        '#99ff99', '#66ff99', '#33ff33', '#33cc00', '#009900', '#006600', '#003300',
-        // turquoises
-        '#99ffff', '#33ffff', '#66cccc', '#00cccc', '#339999', '#336666', '#003333',
-        // blues
-        '#ccffff', '#66ffff', '#33ccff', '#3366ff', '#3333ff', '#000099', '#000066',
-        // purples
-        '#ccccff', '#9999ff', '#6666cc', '#6633ff', '#6600cc', '#333399', '#330099',
-        // violets
-        '#ffccff', '#ff99ff', '#cc66cc', '#cc33cc', '#993399', '#663366', '#330033'
-      ]
-    }
-  },
+  ui,
   asserts: {
     assert() { },
     assertObject() {}

@@ -525,7 +525,7 @@ Blockly.Variables.renameVariable = function(workspace, variable,
  */
 Blockly.Variables.trimName_ = function(name) {
   if (name) {
-    return goog.string.trim(name);
+    return name.trim();
   } else {
     // Return whatever was provided
     return name;
