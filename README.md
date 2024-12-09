@@ -1,59 +1,39 @@
-# scratch-blocks
+# Evex Scratch-Blocks
+
+[![JSR](https://jsr.io/badges/@evex/scratch-blocks)](https://jsr.io/@evex/scratch-blocks)
 
 Scratch Blocks is a library for building creative computing interfaces.
 
-[![CircleCI](https://dl.circleci.com/status-badge/img/gh/LLK/scratch-blocks/tree/develop.svg?style=shield)](https://dl.circleci.com/status-badge/redirect/gh/LLK/scratch-blocks/tree/develop)
 
 ![An image of Scratch Blocks running on a tablet](https://cloud.githubusercontent.com/assets/747641/15227351/c37c09da-1854-11e6-8dc7-9a298f2b1f01.jpg)
 
-## Introduction
+## What is this
 
-Scratch Blocks is a fork of Google's [Blockly](https://github.com/google/blockly) project that provides a design
-specification and codebase for building creative computing interfaces. Together with the [Scratch Virtual Machine
-(VM)](https://github.com/scratchfoundation/scratch-vm) this codebase allows for the rapid design and development of visual
-programming interfaces. Unlike [Blockly](https://github.com/google/blockly), Scratch Blocks does not use [code
-generators](https://developers.google.com/blockly/guides/configure/web/code-generators), but rather leverages the
-[Scratch Virtual Machine](https://github.com/scratchfoundation/scratch-vm) to create highly dynamic, interactive programming
-environments.
+[scratch-blocks](https://github.com/scratchfoundation/scratch-blocks) is a library to create visual programming environment. It's used in block editor on [Scratch](https://scratch.mit.edu). It's also fork of [Blockly](https://developers.google.com/blockly).
 
-*This project is in active development and should be considered a "developer preview" at this time.*
+However, Scratch Team forked Blockly in 2016[^when_fork]. Currently, there are ESM and most of developers use it. ESM is released 2015, so Blockly which was in 2016 hadn't used ESM, used Google Closure Library. After that, Blockly migrated to ESM, but Scratch Team didn't migrate to ESM.
+Google Closure Library is a very old architecture. It changes global namespace. And it's difficult to use it with Vite. So we needed to get Scratch Blocks which uses ESM, but Scratch Team is conservative and we think Scratch Team won't migrate and accept PR.
 
-## Two Types of Blocks
+Then we forked Scratch Blocks. It is patched to migrate to ESM. Scratch Blocks can't work with Vite, in contrast it works with Vite!
 
-![A divided image showing horizontal blocks on the left and vertical blocks on the right](https://cloud.githubusercontent.com/assets/747641/15255731/dad4d028-190b-11e6-9c16-8df7445adc96.png)
+[^when_fork]: https://github.com/scratchfoundation/scratch-blocks/commit/b66a514a196ffc9be45bc346e3812d3fe8239c8f
 
-Scratch Blocks brings together two different programming "grammars" that the Scratch Team has designed and continued
-to refine over the past decade. The standard [Scratch](https://scratch.mit.edu) grammar uses blocks that snap together
-vertically, much like LEGO bricks. For our [ScratchJr](https://scratchjr.org) software, intended for younger children,
-we developed blocks that are labelled with icons rather than words, and snap together horizontally rather than
-vertically. We have found that the horizontal grammar is not only friendlier for beginning programmers but also better
-suited for devices with small screens.
+## Usage
 
-## Documentation
-
-The "getting started" guide including [FAQ](https://scratch.mit.edu/developers#faq) and [design
-documentation](https://github.com/scratchfoundation/scratch-blocks/wiki/Design) can be found in the
-[wiki](https://github.com/scratchfoundation/scratch-blocks/wiki).
-
-## Donate
-
-We provide [Scratch](https://scratch.mit.edu) free of charge, and want to keep it that way! Please consider making a
-[donation](https://secure.donationpay.org/scratchfoundation/) to support our continued engineering, design, community,
-and resource development efforts. Donations of any size are appreciated. Thank you!
-
-## Committing
-
-This project uses [semantic release](https://github.com/semantic-release/semantic-release) to ensure version bumps
-follow semver so that projects depending on it don't break unexpectedly.
-
-In order to automatically determine version updates, semantic release expects commit messages to follow the
-[conventional-changelog](https://github.com/bcoe/conventional-changelog-standard/blob/master/convention.md)
-specification.
-
-You can use the [commitizen CLI](https://github.com/commitizen/cz-cli) to make commits formatted in this way:
-
-```bash
-npm install -g commitizen@latest cz-conventional-changelog@latest
+The package is published in [JSR](https://jsr.io/@evex/scratch-blocks). You can install this with npm, yarn, pnpm, Deno, Bun, and others.
+```shell
+npx jsr add @evex/scratch-blocks # npm
+yarn dlx jsr add @evex/scratch-blocks # yarn
+pnpm dlx jsr add @evex/scratch-blocks # pnpm
+deno add jsr:@evex/scratch-blocks # Deno
+bunx jsr add @evex/scratch-blocks # Bun
 ```
+Or, you can directly use in browser with [esm.sh](https://esm.sh): `https://esm.sh/jsr/@evex/scratch-blocks`.
 
-Now you're ready to make commits using `git cz`.
+To import API,
+```ts
+import Blockly from '@evex/scratch-blocks'
+
+// Or, with esm.sh
+import Blockly from 'https://esm.sh/jsr/@evex/scratch-blocks'
+```
