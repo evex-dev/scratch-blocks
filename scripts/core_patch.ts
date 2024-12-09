@@ -1,6 +1,6 @@
 import { Glob, $ } from 'bun'
 import path from 'node:path'
-import * as fs from 'node:fs/promises'
+import { Buffer } from 'node:buffer'
 
 await $`rm -rf tmp && mkdir tmp`
 await $`cp -R core tmp/core`
@@ -61,3 +61,16 @@ for (const provided of allProvides) {
   }
 }
 await Bun.write('./src/default-blockly.js', `// auto-generated\n\nexport default ${JSON.stringify(defaultBlocklyJSON.Blockly, null, 2)}\n`)
+
+// Assets
+let bundledAssets: Record<string, string> = {}
+for await (const entry of new Glob('./media/**/*').scan()) {
+  const file = Bun.file(entry)
+  const mimetype = file.type
+  const base64 = Buffer.from(await file.arrayBuffer()).toString('base64')
+  const url = `data:${mimetype};base64,${base64}`
+
+  bundledAssets[path.relative('./media', entry).replaceAll('\\', '/')] = url
+}
+
+await Bun.write('./tmp/assets.js', `// auto-generated\n\nexport default ${JSON.stringify(bundledAssets, null, 2)}\n`)
