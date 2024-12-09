@@ -1051,7 +1051,7 @@ Blockly.BlockSvg.prototype.computeOutputPadding_ = function(inputRows) {
     return;
   }
   // Blocks with outputs must have single row to be padded.
-  if (inputRows.length > 1) {
+  if (inputRows.length !== 1) {
     return;
   }
   var row = inputRows[0];

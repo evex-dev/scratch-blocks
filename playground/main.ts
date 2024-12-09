@@ -1,3 +1,21 @@
 import Blockly from '../src'
 
-Blockly.inject(document.getElementById('app'))
+const workspace = Blockly.inject(document.getElementById('app'), {
+  zoom: {
+    controls: true
+  },
+  scrollbar: true,
+  toolboxOptions: {
+    color: true,
+    inverted: true
+  },
+  grid: {
+    spacing: 20,
+    length: 3,
+    colour: '#ccc',
+    snap: true,
+  },
+  media: '/media/'
+})
+
+globalThis.Blockly = Blockly

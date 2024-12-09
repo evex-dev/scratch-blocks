@@ -1,4 +1,5 @@
 import DefaultBlockly from './default-blockly'
+import * as color from './goog/color'
 
 export const Blockly = DefaultBlockly
 
@@ -42,6 +43,15 @@ export const goog = {
       static magnitude(a: typeof goog.math.Coordinate.prototype) {
         return Math.hypot(a.x, a.y)
       }
+      static sum(a: typeof goog.math.Coordinate.prototype, b: typeof goog.math.Coordinate.prototype) {
+        return new goog.math.Coordinate(a.x + b.x, a.y + b.y)
+      }
+      scale(sx: number, sy?: number) {
+        sy ??= sx
+        this.x *= sx
+        this.y *= sy
+        return this
+      }
     },
     Size: class Size {
       width: number
@@ -80,6 +90,9 @@ export const goog = {
   },
   isFunction(val: unknown): val is Function {
     return typeof val === 'function' || val instanceof Function
+  },
+  isNumber(val: unknown): val is number {
+    return typeof val === 'number' || val instanceof Number
   },
   string: {
     isEmptyOrWhitespace(v: string): boolean {
@@ -130,6 +143,21 @@ export const goog = {
     }),
     getDocumentScroll() {
       return new goog.math.Coordinate(window.pageXOffset, window.pageYOffset)
+    },
+    insertSiblingAfter(newNode?: Node, refNode?: Node) {
+      if (!(newNode && refNode)) {
+        return
+      }
+      refNode.parentNode?.insertBefore(newNode, refNode.nextSibling)
+    },
+    removeNode(node: Node) {
+      return node && node.parentNode ? node.parentNode.removeChild(node) : null
+    },
+    removeChildren(parentNode: Node) {
+      let child: Node | null
+      while (child = parentNode.firstChild) {
+        child && parentNode.removeChild(child)
+      }
     }
   },
   ui: {
@@ -163,7 +191,8 @@ export const goog = {
     }
   },
   asserts: {
-    assert() { }
+    assert() { },
+    assertObject() {}
   },
   userAgent: {
     IPAD: navigator.userAgent.includes('iPad'),
@@ -172,5 +201,28 @@ export const goog = {
     EDGE: navigator.userAgent.includes('Edge'),
     WEBKIT: navigator.userAgent.includes('WebKit')
   },
+  mixin(target, ...sources) {
+    sources.forEach(source => {
+      if (source && typeof source === 'object') {
+        for (const key in source) {
+          target[key] = source[key];
+        }
+      }
+    })
+  },
+  array: {
+    clone<T>(arr: T[]): T[] {
+      return [...arr]
+    },
+    remove(arr: unknown[], target: unknown): boolean {
+      const index = arr.indexOf(target)
+      if (index !== -1) {
+        arr.splice(index, 1)
+        return true
+      }
+      return false
+    }
+  },
+  color
 }
 
