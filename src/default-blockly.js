@@ -1,12 +1,6 @@
 // auto-generated
 
 export default {
-  "Msg": {
-    "en": {}
-  },
-  "ScratchMsgs": {
-    "allLocales": {}
-  },
   "Block": {},
   "Blocks": {
     "control": {},
@@ -102,6 +96,7 @@ export default {
   "inject": {},
   "Input": {},
   "InsertionMarkerManager": {},
+  "Msg": {},
   "Mutator": {},
   "Names": {},
   "Options": {},
@@ -110,6 +105,7 @@ export default {
   "scratchBlocksUtils": {},
   "ScratchBlockComment": {},
   "ScratchBubble": {},
+  "ScratchMsgs": {},
   "Scrollbar": {},
   "ScrollbarPair": {},
   "Toolbox": {},

@@ -4,7 +4,6 @@ import * as fs from 'node:fs/promises'
 
 await $`rm -rf tmp && mkdir tmp`
 await $`cp -R core tmp/core`
-await $`cp -R msg tmp/msg`
 await $`cp -R blocks_common tmp/blocks_common`
 await $`cp -R blocks_vertical tmp/blocks_vertical`
 
