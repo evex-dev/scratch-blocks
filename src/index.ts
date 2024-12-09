@@ -1,5 +1,8 @@
 import { Blockly } from './global-patches'
 
+// l10n
+import './inject-locales'
+
 // Blockly core
 import '../tmp/core/blockly'
 import '../tmp/core/inject'
@@ -10,6 +13,7 @@ import '../tmp/blocks_common/note'
 import '../tmp/blocks_common/text'
 
 // Vertical blocks
+import '../tmp/blocks_vertical/procedures'
 import '../tmp/blocks_vertical/default_toolbox'
 import '../tmp/blocks_vertical/vertical_extensions'
 // Load blocks
