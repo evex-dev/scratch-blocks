@@ -13,14 +13,17 @@
   "browser": "./shim/vertical.js",
   "scripts": {
     "dev": "vite",
-    "b": "bun scripts/core_patch.ts"
+    "b": "bun scripts/core_patch.ts",
+    "build": "bun scripts/build.ts",
+    "publish": "jsr publish"
   },
   "dependencies": {
     "scratch-l10n": "^3.18.3"
   },
   "devDependencies": {
     "@types/bun": "^1.1.14",
-    "vite": "^6.0.3"
+    "vite": "^6.0.3",
+    "jsr": "^0.13.2"
   },
   "config": {
     "commitizen": {
