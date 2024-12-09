@@ -14,7 +14,7 @@
   "scripts": {
     "dev": "vite",
     "b": "bun scripts/core_patch.ts",
-    "build": "bun scripts/build.ts",
+    "build": "bun b && bun scripts/build.ts",
     "publish": "jsr publish"
   },
   "dependencies": {
