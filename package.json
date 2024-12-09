@@ -15,7 +15,8 @@
     "dev": "vite",
     "b": "bun scripts/core_patch.ts",
     "build": "bun b && bun scripts/build.ts",
-    "publish": "jsr publish"
+    "publish": "jsr publish",
+    "build:page": "vite build"
   },
   "dependencies": {
     "scratch-l10n": "^3.18.3"
