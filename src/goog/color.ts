@@ -1,10 +1,10 @@
 const toHex = (n: number) => n.toString(16).padStart(2, '0')
 
-type RGB = [r: number, g: number, b: number]
+type Vec3 = [r: number, g: number, b: number]
 
 export const rgbToHex = (r: number, g: number, b: number) => `#${toHex(r)}${toHex(g)}${toHex(b)}`
-export const rgbArrayToHex = ([r, g, b]: RGB) => rgbToHex(r, g, b)
-export const hexToRgb = (hex: string): RGB => {
+export const rgbArrayToHex = ([r, g, b]: Vec3) => rgbToHex(r, g, b)
+export const hexToRgb = (hex: string): Vec3 => {
   hex = hex.slice(1)
 
   if (hex.length === 3) {
@@ -20,7 +20,7 @@ export const hexToRgb = (hex: string): RGB => {
   return [r, g, b]
 }
 
-export const blend = (rgb1: RGB, rgb2: RGB, factor: number): RGB => {
+export const blend = (rgb1: Vec3, rgb2: Vec3, factor: number): Vec3 => {
   factor = Math.min(Math.max(factor, 0), 1)
 
   return [
@@ -30,5 +30,32 @@ export const blend = (rgb1: RGB, rgb2: RGB, factor: number): RGB => {
   ]
 }
 
-export const darken = (rgb: RGB, factor: number): RGB => blend(rgb, [0, 0, 0], factor)
+export const darken = (rgb: Vec3, factor: number): Vec3 => blend(rgb, [0, 0, 0], factor)
 
+export const rgbToHsv = (r, g, b): Vec3 => {
+  r /= 255
+  g /= 255
+  b /= 255
+
+  const max = Math.max(r, g, b)
+  const min = Math.min(r, g, b)
+  const delta = max - min
+
+  let h = 0
+  if (delta !== 0) {
+    if (max === r) {
+      h = ((g - b) / delta + (g < b ? 6 : 0)) * 60
+    } else if (max === g) {
+      h = ((b - r) / delta + 2) * 60
+    } else {
+      h = ((r - g) / delta + 4) * 60
+    }
+  }
+
+  const s = max === 0 ? 0 : delta / max
+  const v = max
+
+  return [h, s, v]
+}
+
+export const hexToHsv = (hex: string): Vec3 => rgbToHsv(...hexToRgb(hex))
