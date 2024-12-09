@@ -57,5 +57,35 @@ export const rgbToHsv = (r, g, b): Vec3 => {
 
   return [h, s, v]
 }
+export const hsvToRgb = (h: number, s: number, v: number): Vec3 => {
+  v = v / 255
+
+  const c = v * s
+  const x = c * (1 - Math.abs((h / 60) % 2 - 1))
+  const m = v - c
+
+  let r = 0, g = 0, b = 0
+
+  if (h >= 0 && h < 60) {
+      [r, g, b] = [c, x, 0]
+  } else if (h >= 60 && h < 120) {
+      [r, g, b] = [x, c, 0]
+  } else if (h >= 120 && h < 180) {
+      [r, g, b] = [0, c, x]
+  } else if (h >= 180 && h < 240) {
+      [r, g, b] = [0, x, c]
+  } else if (h >= 240 && h < 300) {
+      [r, g, b] = [x, 0, c]
+  } else if (h >= 300 && h <= 360) {
+      [r, g, b] = [c, 0, x]
+  }
+
+  return [
+      Math.round((r + m) * 255),
+      Math.round((g + m) * 255),
+      Math.round((b + m) * 255),
+  ];
+}
 
 export const hexToHsv = (hex: string): Vec3 => rgbToHsv(...hexToRgb(hex))
+export const hsvToHex = (h: number, s: number, v: number): string => rgbToHex(...hsvToRgb(h, s, v))

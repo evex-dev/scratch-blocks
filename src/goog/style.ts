@@ -15,3 +15,16 @@ export const getSize = (elem: Element) => {
   const rect = elem.getBoundingClientRect()
   return new Size(rect.width, rect.height)
 }
+
+function setStyle(elem: HTMLElement, style: Record<string, string>): void
+function setStyle(elem: HTMLElement, key: string, value: string): void
+function setStyle(elem: HTMLElement, style: Record<string, string> | string, value?: string): void {
+  if (typeof style === 'string') {
+    elem.style.setProperty(style, value ?? '')
+  } else {
+    for (const key in style) {
+      elem.style.setProperty(key, style[key])
+    }
+  }
+}
+export { setStyle }

@@ -36,13 +36,14 @@ export class Menu extends EventTarget {
     }
   }
 }
-class MenuActiveEvent extends Event {
+class UIEvent extends Event {
   target!: MenuItem
-  constructor(target: MenuItem) {
-    super('action')
+  constructor(name: string, target: EventTarget) {
+    super(name)
     Object.defineProperty(this, 'target', { writable: false, value: target })
   }
 }
+
 export class MenuItem extends EventTarget {
   #isRight: boolean = false
   #content: string
@@ -59,7 +60,7 @@ export class MenuItem extends EventTarget {
     this.#elem = document.createElement('div')
     this.#elem.className = 'goog-menuitem goog-option'
     this.#elem.onclick = () => {
-      const event = new MenuActiveEvent(this)
+      const event = new UIEvent('action', this)
       this._menu?.dispatchEvent(event)
     }
     const googMenuItemContent = document.createElement('div')
@@ -94,6 +95,91 @@ export class MenuItem extends EventTarget {
   }
   getValue() {
     return this.#value
+  }
+}
+
+const pointerDownedData = new Map<number, boolean>()
+
+export class Slider extends EventTarget {
+  #unitIncrement = 1
+  #minium = 0
+  #maximum = 0
+  #moveToPointEnabled = false
+  #step = 1
+  #value = 0
+
+  #elem: HTMLDivElement
+  #thumb: HTMLDivElement
+  #thumbRect: DOMRect
+  constructor() {
+    super()
+
+    this.#elem = document.createElement('div')
+    this.#elem.className = 'goog-slider-horizontal'
+    this.#elem.role = 'slider'
+
+    const thumb = document.createElement('div')
+    thumb.className = 'goog-slider-thumb'
+    thumb.role = 'button'
+    this.#elem.append(thumb)
+    this.#thumbRect = thumb.getBoundingClientRect()
+
+    thumb.onpointerdown = (e) => {
+      pointerDownedData.set(e.pointerId, true)
+      thumb.setPointerCapture(e.pointerId)
+    }
+    thumb.onpointermove = (e) => {
+      if (!pointerDownedData.get(e.pointerId)) {
+        return
+      }
+      thumb.setPointerCapture(e.pointerId)
+      const elemRect = this.#elem.getBoundingClientRect()
+      const width = elemRect.width - this.#thumbRect.width
+      const rate = Math.max(Math.min((e.clientX - elemRect.left) / width, 1), 0)
+      const value = this.#minium + rate * (this.#maximum - this.#minium)
+      this.setValue(value)
+    }
+    thumb.onpointercancel = thumb.onpointerup = (e: PointerEvent) => {
+      pointerDownedData.delete(e.pointerId)
+      this.#elem.releasePointerCapture(e.pointerId)
+    }
+    this.#thumb = thumb
+  }
+  render (container: Element) {
+    container.append(this.#elem)
+  }
+  getElement() {
+    return this.#elem
+  }
+
+  setUnitIncrement(unitIncrement: number) {
+    this.#unitIncrement = unitIncrement
+  }
+  setMaximum(maxium: number) {
+    this.#maximum = maxium
+    this.#elem.ariaValueMax = maxium.toString()
+  }
+  setMinimum(minimum: number) {
+    this.#minium = minimum
+    this.#elem.ariaValueMin = minimum.toString()
+  }
+  setMoveToPointEnabled (v: boolean) {
+    this.#moveToPointEnabled = v
+  }
+  setStep (v: number) {
+    this.#step = v
+  }
+  getValue () {
+    return this.#value
+  }
+  setValue(v: number) {
+    this.#value = v
+    this.#elem.ariaValueNow = v.toString()
+    const rect = this.#elem.getBoundingClientRect()
+    const width = rect.width - this.#thumbRect.width
+    this.#thumb.style.left = `${(v - this.#minium) / (this.#maximum - this.#minium) * width}px`
+
+    this.dispatchEvent(new UIEvent('change', this))
   }
 }
 
