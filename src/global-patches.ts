@@ -1,5 +1,7 @@
 import DefaultBlockly from './default-blockly'
 import * as color from './goog/color'
+import * as math from './goog/math'
+import * as style from './goog/style'
 
 export const Blockly = DefaultBlockly
 
@@ -20,64 +22,7 @@ export const goog = {
     }
     childCtor.superClass_ = parentCtor.prototype
   },
-  math: {
-    Coordinate: class Coordinate {
-      x: number
-      y: number
-      constructor(x: number, y: number) {
-        this.x = x
-        this.y = y
-      }
-      static equals(a?: typeof goog.math.Coordinate.prototype, b?: typeof goog.math.Coordinate.prototype) {
-        if (a === b) {
-          return true
-        }
-        if (!a || !b) {
-          return false
-        }
-        return a.x === b.x && a.y === b.y
-      }
-      static difference(a: typeof goog.math.Coordinate.prototype, b: typeof goog.math.Coordinate.prototype) {
-        return new goog.math.Coordinate(a.x - b.x, a.y - b.y)
-      }
-      static magnitude(a: typeof goog.math.Coordinate.prototype) {
-        return Math.hypot(a.x, a.y)
-      }
-      static sum(a: typeof goog.math.Coordinate.prototype, b: typeof goog.math.Coordinate.prototype) {
-        return new goog.math.Coordinate(a.x + b.x, a.y + b.y)
-      }
-      scale(sx: number, sy?: number) {
-        sy ??= sx
-        this.x *= sx
-        this.y *= sy
-        return this
-      }
-    },
-    Size: class Size {
-      width: number
-      height: number
-      constructor(w: number, h: number) {
-        this.width = w
-        this.height = h
-      }
-    },
-    Rect: class Rect {
-      left: number
-      top: number
-      width: number
-      height: number
-      constructor(x: number, y: number, w: number, h: number) {
-        this.left = x
-        this.top = y
-        this.width = w
-        this.height = h
-      }
-      contains(another: typeof goog.math.Coordinate['prototype']) {
-        return another.x >= this.left && another.x <= this.left + this.width &&
-        another.y >= this.top && another.y <= this.top + this.height
-      }
-    }
-  },
+  math,
   global: {
     console,
     Blockly
@@ -223,6 +168,6 @@ export const goog = {
       return false
     }
   },
-  color
+  color,
+  style
 }
-
