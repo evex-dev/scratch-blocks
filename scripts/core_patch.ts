@@ -1,11 +1,12 @@
 import { Glob, $ } from 'bun'
 import path from 'node:path'
+import * as fs from 'node:fs/promises'
 
 await $`rm -rf tmp && mkdir tmp`
-await $`cp -r core tmp/core`
-await $`cp -r msg tmp/msg`
-await $`cp -r blocks_common tmp/blocks_common`
-await $`cp -r blocks_vertical tmp/blocks_vertical`
+await $`cp -R core tmp/core`
+await $`cp -R msg tmp/msg`
+await $`cp -R blocks_common tmp/blocks_common`
+await $`cp -R blocks_vertical tmp/blocks_vertical`
 
 const REQUIRE_REGEX = /(?<=goog\.require\(['"]).+?(?=['"]\))/g
 const PROVIDE_REGEX = /(?<=goog\.provide\(['"]).+?(?=['"]\))/g
@@ -37,7 +38,7 @@ for await (const entry of new Glob('./tmp/**/*.js').scan()) {
 }
 
 for (const [filePath, { requires, code, provides }] of fileData) {
-  let outputCode = `import { Blockly, goog } from '${path.relative(path.dirname(filePath), './src/global-patches.ts')}'\n\n` + code
+  let outputCode = `import { Blockly, goog } from '${path.relative(path.dirname(filePath), './src/global-patches.ts').replaceAll('\\', '/')}'\n\n` + code
   for (const required of requires) {
     const pathsToImport = (provideFiles.get(required) ?? []).map(i => `import "./${path.relative(path.dirname(filePath), i).replaceAll('\\', '/')}"`).join('\n')
     outputCode = outputCode.replace(`goog.require('${required}');`, pathsToImport)
