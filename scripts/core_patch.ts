@@ -60,7 +60,7 @@ for (const provided of allProvides) {
     crr = crr[seq]
   }
 }
-await Bun.write('./src/default-blockly.js', `// auto-generated\n\nexport default ${JSON.stringify(defaultBlocklyJSON.Blockly, null, 2)}\n`)
+await Bun.write('./tmp/default-blockly.js', `// auto-generated\n\nexport default ${JSON.stringify(defaultBlocklyJSON.Blockly, null, 2)}\n`)
 
 // Assets
 let bundledAssets: Record<string, string> = {}

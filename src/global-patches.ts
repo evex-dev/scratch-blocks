@@ -1,4 +1,4 @@
-import DefaultBlockly from './default-blockly'
+import DefaultBlockly from '../tmp/default-blockly'
 import * as color from './goog/color'
 import * as math from './goog/math'
 import * as style from './goog/style'
