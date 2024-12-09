@@ -57,7 +57,7 @@ export const goog = {
       }
       return parent.contains(child)
     },
-    createDom(tag?: string, attrs?: Record<string, string> | string | string[], children?: (undefined | null | Node | string)[]): Element {
+    createDom(tag?: string, attrs?: Record<string, string> | string | string[], children?: (undefined | null | Node | string)[] | undefined | null | Node | string): Element {
       const elem = document.createElement(String(tag))
       if (attrs) {
         if (typeof attrs === 'string') {
@@ -72,7 +72,7 @@ export const goog = {
         }
       }
       if (children) {
-        for (const child of children) {
+        for (const child of Array.isArray(children) ? children : [children]) {
           if (child === null || child === undefined) {
             continue
           }
