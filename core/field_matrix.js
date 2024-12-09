@@ -248,8 +248,7 @@ Blockly.FieldMatrix.prototype.init = function() {
       'transform': 'translate(' + arrowX + ', ' + arrowY + ')'
     }, this.fieldGroup_);
     this.arrow_.setAttributeNS('http://www.w3.org/1999/xlink',
-        'xlink:href', Blockly.mainWorkspace.options.pathToMedia +
-        'dropdown-arrow.svg');
+        'xlink:href', Blockly.Assets['dropdown-arrow.svg']);
     this.arrow_.style.cursor = 'default';
   }
 

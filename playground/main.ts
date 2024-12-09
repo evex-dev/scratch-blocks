@@ -15,7 +15,6 @@ const workspace = Blockly.inject(document.getElementById('app'), {
     colour: '#ccc',
     snap: true,
   },
-  media: '/media/'
 })
 
 globalThis.Blockly = Blockly

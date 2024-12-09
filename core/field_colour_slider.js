@@ -337,7 +337,7 @@ Blockly.FieldColourSlider.prototype.showEditor_ = function() {
     var button = document.createElement('button');
     button.setAttribute('class', 'scratchEyedropper');
     var image = document.createElement('img');
-    image.src = Blockly.mainWorkspace.options.pathToMedia + Blockly.FieldColourSlider.EYEDROPPER_PATH;
+    image.src = Blockly.Assets[Blockly.FieldColourSlider.EYEDROPPER_PATH];
     button.appendChild(image);
     div.appendChild(button);
     Blockly.FieldColourSlider.eyedropperEventData_ =

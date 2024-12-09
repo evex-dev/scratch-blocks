@@ -186,7 +186,7 @@ Blockly.Trashcan.prototype.createDom = function() {
       },
       this.svgGroup_);
   body.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href',
-      this.workspace_.options.pathToMedia + Blockly.SPRITE.url);
+    Blockly.Assets[Blockly.SPRITE.url]);
 
   clip = Blockly.utils.createSvgElement('clipPath',
       {'id': 'blocklyTrashLidClipPath' + rnd},
@@ -203,7 +203,7 @@ Blockly.Trashcan.prototype.createDom = function() {
       },
       this.svgGroup_);
   this.svgLid_.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href',
-      this.workspace_.options.pathToMedia + Blockly.SPRITE.url);
+    Blockly.Assets[Blockly.SPRITE.url]);
 
   Blockly.bindEventWithChecks_(this.svgGroup_, 'mouseup', this, this.click);
   this.animateLid_();

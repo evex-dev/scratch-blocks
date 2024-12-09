@@ -122,12 +122,11 @@ Blockly.FlyoutExtensionCategoryHeader.prototype.createDom = function() {
  */
 Blockly.FlyoutExtensionCategoryHeader.prototype.refreshStatus = function() {
   var status = Blockly.FlyoutExtensionCategoryHeader.getExtensionState(this.extensionId);
-  var basePath = Blockly.mainWorkspace.options.pathToMedia;
   if (status == Blockly.StatusButtonState.READY) {
-    this.setImageSrc(basePath + 'status-ready.svg');
+    this.setImageSrc(Blockly.Assets['status-ready.svg']);
   }
   if (status == Blockly.StatusButtonState.NOT_READY) {
-    this.setImageSrc(basePath + 'status-not-ready.svg');
+    this.setImageSrc(Blockly.Assets['status-not-ready.svg']);
   }
 };
 

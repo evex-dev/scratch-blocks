@@ -2,6 +2,8 @@ import { Blockly } from './global-patches'
 
 // l10n
 import './inject-locales'
+// assets
+import './inject-assets'
 
 // Blockly core
 import '../tmp/core/blockly'

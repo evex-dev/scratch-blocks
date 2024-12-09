@@ -211,7 +211,7 @@ Blockly.ZoomControls.prototype.createZoomOutSvg_ = function() {
       this.svgGroup_
   );
   zoomoutSvg.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href',
-      ws.options.pathToMedia + this.ZOOM_OUT_PATH_);
+    Blockly.Assets[this.ZOOM_OUT_PATH_]);
   // Attach listener.
   Blockly.bindEventWithChecks_(zoomoutSvg, 'mousedown', null, function(e) {
     ws.markFocused();
@@ -248,7 +248,7 @@ Blockly.ZoomControls.prototype.createZoomInSvg_ = function() {
       this.svgGroup_
   );
   zoominSvg.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href',
-      ws.options.pathToMedia + this.ZOOM_IN_PATH_);
+    Blockly.Assets[this.ZOOM_IN_PATH_]);
 
   // Attach listener.
   Blockly.bindEventWithChecks_(zoominSvg, 'mousedown', null, function(e) {
@@ -287,7 +287,7 @@ Blockly.ZoomControls.prototype.createZoomResetSvg_ = function() {
       this.svgGroup_
   );
   zoomresetSvg.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href',
-      ws.options.pathToMedia + this.ZOOM_RESET_PATH_);
+    Blockly.Assets[this.ZOOM_RESET_PATH_]);
 
   // Attach event listeners.
   Blockly.bindEventWithChecks_(zoomresetSvg, 'mousedown', null, function(e) {

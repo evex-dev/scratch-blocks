@@ -446,16 +446,16 @@ Blockly.inject.loadSounds_ = function(pathToMedia, workspace) {
   var audioMgr = workspace.getAudioManager();
   audioMgr.load(
       [
-        pathToMedia + 'click.mp3',
-        pathToMedia + 'click.wav',
-        pathToMedia + 'click.ogg'
+        Blockly.Assets['click.mp3'],
+        Blockly.Assets['click.wav'],
+        Blockly.Assets['click.ogg']
       ],
       'click');
   audioMgr.load(
       [
-        pathToMedia + 'delete.mp3',
-        pathToMedia + 'delete.ogg',
-        pathToMedia + 'delete.wav'
+        Blockly.Assets['delete.mp3'],
+        Blockly.Assets['delete.ogg'],
+        Blockly.Assets['delete.wav']
       ],
       'delete');
 
