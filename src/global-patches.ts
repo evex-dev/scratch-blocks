@@ -29,7 +29,7 @@ export const goog = {
     return typeof val === 'string' || val instanceof String
   },
   isObject(val: unknown): val is object {
-    return val !== null && val !== undefined
+    return val !== null && val !== undefined && typeof val !== 'string'
   },
   isFunction(val: unknown): val is Function {
     return typeof val === 'function' || val instanceof Function

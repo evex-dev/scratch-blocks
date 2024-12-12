@@ -143,7 +143,7 @@ Blockly.Colours.overrideColours = function(colours) {
         // Override Blockly category color object properties with those
         // provided.
         var colourPropertyValue = colours[colourProperty];
-        if (goog.isObject(colourPropertyValue)) {
+        if (typeof colourPropertyValue !== 'string') {
           for (var colourSequence in colourPropertyValue) {
             if (colourPropertyValue.hasOwnProperty(colourSequence) &&
               Blockly.Colours[colourProperty].hasOwnProperty(colourSequence)) {
