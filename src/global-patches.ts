@@ -70,8 +70,7 @@ export const goog = {
           elem.className = attrs.join(' ')
         } else {
           for (const key in attrs) {
-            // @ts-ignore
-            elem[key] = attrs[key]
+            elem.setAttribute(key, attrs[key])
           }
         }
       }
