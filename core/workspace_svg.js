@@ -984,7 +984,7 @@ Blockly.WorkspaceSvg.prototype.reportValue = function(id, value) {
   Blockly.DropDownDiv.hideWithoutAnimation();
   Blockly.DropDownDiv.clearContent();
   var contentDiv = Blockly.DropDownDiv.getContentDiv();
-  var valueReportBox = goog.dom.createElement('div');
+  var valueReportBox = document.createElement('div');
   valueReportBox.setAttribute('class', 'valueReportBox');
   valueReportBox.innerHTML = Blockly.scratchBlocksUtils.encodeEntities(value);
   contentDiv.appendChild(valueReportBox);
