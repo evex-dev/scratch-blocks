@@ -111,7 +111,8 @@ export const goog = {
   ui,
   asserts: {
     assert() { },
-    assertObject() {}
+    assertObject() {},
+    fail(er) { throw new Error(er) }
   },
   userAgent: {
     IPAD: navigator.userAgent.includes('iPad'),
